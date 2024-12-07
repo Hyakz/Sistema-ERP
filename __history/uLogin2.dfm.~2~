@@ -1,0 +1,51 @@
+object frmLogin2: TfrmLogin2
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  ClientHeight = 527
+  ClientWidth = 933
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlPrincipal: TPanel
+    Left = 0
+    Top = 0
+    Width = 933
+    Height = 527
+    Align = alClient
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitLeft = 8
+    ExplicitWidth = 931
+    DesignSize = (
+      933
+      527)
+    object btnFechar: TSpeedButton
+      Left = 892
+      Top = 13
+      Width = 30
+      Height = 30
+      Cursor = crHandPoint
+      Anchors = [akTop, akRight]
+      Caption = 'X'
+      Flat = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -21
+      Font.Name = 'Segoe UI Light'
+      Font.Style = []
+      ParentFont = False
+      OnClick = btnFecharClick
+      ExplicitLeft = 890
+    end
+  end
+end

@@ -1,0 +1,24 @@
+inherited frmConCategoria: TfrmConCategoria
+  Caption = 'Consulta de Categorias'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnl1: TPanel
+    inherited medtPesquisa: TMaskEdit
+      ExplicitTop = 25
+      ExplicitWidth = 1010
+    end
+  end
+  inherited pnl2: TPanel
+    ExplicitTop = 50
+    ExplicitWidth = 1012
+    ExplicitHeight = 437
+    inherited dbgrdPesquisa: TDBGrid
+      OnDrawColumnCell = nil
+    end
+  end
+  inherited pnl3: TPanel
+    ExplicitLeft = 0
+    ExplicitTop = 487
+    ExplicitWidth = 1012
+  end
+end

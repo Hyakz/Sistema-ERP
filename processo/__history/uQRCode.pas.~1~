@@ -1,0 +1,25 @@
+unit uQRCode;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.jpeg, Vcl.ExtCtrls;
+
+type
+  TfrmQRCode = class(TForm)
+    imgQRcode: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmQRCode: TfrmQRCode;
+
+implementation
+
+{$R *.dfm}
+
+end.

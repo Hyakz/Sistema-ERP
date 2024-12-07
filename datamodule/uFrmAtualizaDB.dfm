@@ -1,0 +1,22 @@
+object frmAtualizaDB: TfrmAtualizaDB
+  Left = 0
+  Top = 0
+  BorderIcons = [biMinimize]
+  BorderStyle = bsNone
+  ClientHeight = 0
+  ClientWidth = 0
+  Color = clNone
+  Enabled = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDefaultSizeOnly
+  PrintScale = poNone
+  Scaled = False
+  WindowState = wsMinimized
+  PixelsPerInch = 96
+  TextHeight = 13
+end

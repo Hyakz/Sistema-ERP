@@ -1,0 +1,63 @@
+unit uRelCadCategorias;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, RLFilters, RLPDFFilter,
+  Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+
+type
+  TfrmRelCadCategorias = class(TForm)
+    Relatorio: TRLReport;
+    RLBand1: TRLBand;
+    RLLabel1: TRLLabel;
+    RLDraw1: TRLDraw;
+    RLPDFFilter1: TRLPDFFilter;
+    RLBand2: TRLBand;
+    QryCategorias: TZQuery;
+    dtsCategorias: TDataSource;
+    RLDBText1: TRLDBText;
+    QryCategoriascategoriaId: TIntegerField;
+    QryCategoriasdescricao: TWideStringField;
+    RLDBText2: TRLDBText;
+    RLBand3: TRLBand;
+    RLPanel1: TRLPanel;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLBand4: TRLBand;
+    RLSystemInfo3: TRLSystemInfo;
+    RLLabel3: TRLLabel;
+    RLSystemInfo2: TRLSystemInfo;
+    RLLabel2: TRLLabel;
+    RLSystemInfo1: TRLSystemInfo;
+    RLDraw2: TRLDraw;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelCadCategorias: TfrmRelCadCategorias;
+
+implementation
+
+{$R *.dfm}
+
+uses uDtmPrincipal;
+
+procedure TfrmRelCadCategorias.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  QryCategorias.Close;
+end;
+
+procedure TfrmRelCadCategorias.FormCreate(Sender: TObject);
+begin
+  QryCategorias.Open;
+end;
+
+end.

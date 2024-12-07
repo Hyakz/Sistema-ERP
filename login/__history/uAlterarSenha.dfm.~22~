@@ -1,0 +1,279 @@
+object frmAlterarSenha: TfrmAlterarSenha
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'Altera'#231#227'o de Senha para Usuario Logado'
+  ClientHeight = 750
+  ClientWidth = 1050
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnShow = FormShow
+  DesignSize = (
+    1050
+    750)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnAlterar: TBitBtn
+    Left = 917
+    Top = 188
+    Width = 99
+    Height = 25
+    Caption = 'ALTERAR'
+    Glyph.Data = {
+      36030000424D3603000000000000360000002800000010000000100000000100
+      18000000000000030000C20E0000C20E00000000000000000000FF00FFFF00FF
+      FF00FFFF00FFA9B3A9518C58237A2B0E69120D6611227128518357A9B1A9FF00
+      FFFF00FFFF00FFFF00FFFF00FFFF00FFC3C5C352965A168F222EB5433DBD5150
+      C16156C26445BD5534B042106F13507F53C3C4C3FF00FFFF00FFFF00FFC3C5C3
+      38974325B13A3CBE534BBF5D87D28E8BD29172CA7B66C6706DC8745DC26726A0
+      32316E37C3C4C3FF00FFFF00FF55AD6227B63F38BE4F42BF58AFE2B5FCF9F6FC
+      F9F4FAF7F17BCE8268C6726FC8766CC77429A134508054FF00FFA9BFAC21B236
+      2FBE4F3CBF56BFE7C4FCFAF8FCFAF7FCF9F6FCF9F4CBE8C862C56D69C77271C9
+      7861C46B137717A9B1A957BA6A30BF5037BF56D1EFD7FCFBFAFCFBF9FCFAF8FC
+      FAF7FCF9F6FCF9F481D08763C66F6BC77472C97937B3464C825039BD5231C157
+      2CBE4FB3E5BFFCFCFCFCFBFBA3DFACBCE5C0FCFAF7FCF9F6D3ECD15EC46B64C6
+      706CC8754FC0601F782639C15431C2592EBF5332C053C4EBCD86D79839BF5458
+      C76CF7F9F5FCFAF7FCF9F688D3915FC56C66C7725DC46B157E1B40C75D33C45D
+      30C1572EBF532DBF4F2EBE4F34BF523BBF55ACE2B5FCFAF8FCFAF7DDEFDA5CC5
+      6B61C56E58C36816841E4ECC6D36C66132C35B30C1572FC0532DBF4F30BF5036
+      BF534EC565F4F8F2FCFAF8FCFAF78FD6995BC4694AC05F24902C73CF8B3CC963
+      34C55F32C35B31C2572FC0532DBF4F31BF5137BF549EDEABFCFBF9FCFAF8E5F3
+      E45AC56B37BB4D509E58B5CABB54D77637C86334C55F33C45B31C2572FC0532D
+      BF5033BF5342C25DEFF8F0FCFBF9CCEBCF5BC76E1CAB2BAABAABFF00FF84D69D
+      47D06E36C76234C55F33C45B31C2572FC0542EBF5134BF5377D28B71D08443C1
+      5B31BC4758B365FF00FFFF00FFC5C8C677DD9748D16E37C76335C65F33C45B31
+      C2572FC05430BF5235BF5539C05734BF4C41B653C3C6C4FF00FFFF00FFFF00FF
+      C5C8C68EDDA862DF863FCC6637C76134C55D33C35B32C35835C35737C24F65C1
+      75C3C7C4FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFBACEC089DBA268DB8959
+      D97851D46F55CE7371C986AFC6B3FF00FFFF00FFFF00FFFF00FF}
+    TabOrder = 0
+    OnClick = btnAlterarClick
+  end
+  object pnlPrincipal: TPanel
+    Left = 354
+    Top = 188
+    Width = 348
+    Height = 437
+    Anchors = []
+    BevelOuter = bvNone
+    Color = 526344
+    ParentBackground = False
+    TabOrder = 1
+    object btn1: TSpeedButton
+      AlignWithMargins = True
+      Left = 322
+      Top = 2
+      Width = 25
+      Height = 25
+      Cursor = crHandPoint
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
+      Caption = 'X'
+      Flat = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 2237183
+      Font.Height = -17
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblUsuarioLogado: TLabel
+      Left = -48
+      Top = 24
+      Width = 439
+      Height = 34
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'USUARIO'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -21
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object pnl2: TPanel
+      Left = 27
+      Top = 83
+      Width = 292
+      Height = 75
+      BevelOuter = bvNone
+      TabOrder = 0
+      object lbl3: TLabel
+        Left = 0
+        Top = 0
+        Width = 292
+        Height = 21
+        Align = alTop
+        Caption = 'SENHA ATUAL'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 109
+      end
+      object pnl3: TPanel
+        Left = 0
+        Top = 73
+        Width = 292
+        Height = 2
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = 6052956
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object edtSenhaAtual: TEdit
+        Left = 1
+        Top = 27
+        Width = 293
+        Height = 29
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = [fsBold]
+        ParentFont = False
+        PasswordChar = '*'
+        TabOrder = 1
+      end
+    end
+    object pnl4: TPanel
+      Left = 26
+      Top = 180
+      Width = 292
+      Height = 77
+      BevelOuter = bvNone
+      TabOrder = 1
+      object lbl4: TLabel
+        Left = 0
+        Top = 0
+        Width = 292
+        Height = 21
+        Align = alTop
+        Caption = 'NOVA SENHA'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitLeft = -1
+        ExplicitTop = 4
+      end
+      object pnl5: TPanel
+        Left = 0
+        Top = 75
+        Width = 292
+        Height = 2
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = 6052956
+        ParentBackground = False
+        TabOrder = 0
+      end
+      object edtSenhaNova: TEdit
+        Left = 1
+        Top = 31
+        Width = 290
+        Height = 29
+        BevelOuter = bvNone
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = [fsBold]
+        ParentFont = False
+        PasswordChar = '*'
+        TabOrder = 1
+      end
+    end
+    object pnl6: TPanel
+      Left = 27
+      Top = 382
+      Width = 292
+      Height = 32
+      BevelOuter = bvNone
+      Color = 11096071
+      ParentBackground = False
+      TabOrder = 2
+      object btnAcessar: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 292
+        Height = 32
+        Cursor = crHandPoint
+        Align = alClient
+        Caption = 'CONFIRMAR'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = []
+        ParentFont = False
+        ExplicitTop = -1
+      end
+    end
+    object pnl7: TPanel
+      Left = 27
+      Top = 278
+      Width = 292
+      Height = 78
+      BevelOuter = bvNone
+      TabOrder = 3
+      object lbl5: TLabel
+        Left = 0
+        Top = 0
+        Width = 292
+        Height = 21
+        Align = alTop
+        Caption = 'DIGITE NOVAMENTE'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitWidth = 159
+      end
+      object pnl1: TPanel
+        Left = 0
+        Top = 76
+        Width = 292
+        Height = 2
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = 6052956
+        ParentBackground = False
+        TabOrder = 0
+        ExplicitTop = 75
+      end
+      object edtRepetirNovaSenha: TEdit
+        Left = 1
+        Top = 31
+        Width = 290
+        Height = 29
+        BevelOuter = bvNone
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semibold'
+        Font.Style = [fsBold]
+        ParentFont = False
+        PasswordChar = '*'
+        TabOrder = 1
+      end
+    end
+  end
+end

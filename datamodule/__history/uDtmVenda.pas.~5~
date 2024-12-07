@@ -1,0 +1,61 @@
+unit uDtmVenda;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, Datasnap.DBClient;
+
+type
+  TdtmVenda = class(TDataModule)
+    QryCliente: TZQuery;
+    zqryQryClienteclienteID: TIntegerField;
+    wdstrngfldQryClientenome: TWideStringField;
+    QryProdutos: TZQuery;
+    zqryQryProdutosprodutoID: TIntegerField;
+    wdstrngfldQryProdutosnome: TWideStringField;
+    fltfldQryProdutosvalor: TFloatField;
+    fltfldQryProdutosquantidade: TFloatField;
+    dsCliente: TDataSource;
+    dsProdutos: TDataSource;
+    dsVendasItens: TDataSource;
+    cdsVendaItens: TClientDataSet;
+    zqryItensVendasprodutoID: TIntegerField;
+    cdsVendaItensNomeProduto: TStringField;
+    fltfldItensVendasQuantidade: TFloatField;
+    fltfldItensVendasValorUnitario: TFloatField;
+    fltfldItensVendasValorTotalProduto: TFloatField;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dtmVenda: TdtmVenda;
+
+implementation
+
+uses
+  uDTMConexao;
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TdtmVenda.DataModuleCreate(Sender: TObject);
+begin
+  cdsItensVendas.CreateDataSet;
+  QryCliente.Open;
+  QryProdutos.Open;
+end;
+
+procedure TdtmVenda.DataModuleDestroy(Sender: TObject);
+begin
+  cdsItensVendas.Close;
+  QryCliente.Close;
+  QryProdutos.Close;
+end;
+
+end.

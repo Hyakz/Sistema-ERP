@@ -1,0 +1,31 @@
+unit uQRCode;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.jpeg, Vcl.ExtCtrls;
+
+type
+  TfrmQRCode = class(TForm)
+    imgQRcode: TImage;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmQRCode: TfrmQRCode;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmQRCode.FormCreate(Sender: TObject);
+begin
+  WindowState := wsMaximized;
+end;
+
+end.

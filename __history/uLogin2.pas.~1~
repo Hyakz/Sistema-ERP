@@ -1,0 +1,32 @@
+unit uLogin2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TfrmLogin2 = class(TForm)
+    pnlPrincipal: TPanel;
+    btnFechar: TSpeedButton;
+    procedure btnFecharClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLogin2: TfrmLogin2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmLogin2.btnFecharClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+end.

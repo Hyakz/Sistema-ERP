@@ -1,0 +1,322 @@
+unit uCaixaPDV;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Imaging.pngimage, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, System.Actions, Vcl.ActnList, System.DateUtils,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset;
+
+type
+  TfrmCaixaPDV = class(TForm)
+    pnl1: TPanel;
+    pnl2: TPanel;
+    pnl3: TPanel;
+    pnl4: TPanel;
+    img1: TImage;
+    pnl5: TPanel;
+    lbl2: TLabel;
+    pnl6: TPanel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    pnl7: TPanel;
+    lbl5: TLabel;
+    pnl8: TPanel;
+    pnl9: TPanel;
+    pnl10: TPanel;
+    pnl11: TPanel;
+    pnl12: TPanel;
+    pnl13: TPanel;
+    lbl6: TLabel;
+    edtCodigoBarras: TEdit;
+    pnl14: TPanel;
+    imgProdutos: TImage;
+    lbl7: TLabel;
+    lblNome: TLabel;
+    lbl9: TLabel;
+    lblQuantidade: TLabel;
+    lblValorUnitario: TLabel;
+    lbl12: TLabel;
+    lblSubTotal: TLabel;
+    lbl16: TLabel;
+    lblTotal: TLabel;
+    DBGridCaixa: TDBGrid;
+    lbl19: TLabel;
+    lbl20: TLabel;
+    tmr1: TTimer;
+    actlst1: TActionList;
+    actSair: TAction;
+    lbl21: TLabel;
+    QryCaixa: TZQuery;
+    dsCaixa: TDataSource;
+    lbl22: TLabel;
+    actPesquisar: TAction;
+    actQuantidade: TAction;
+    actExcluir: TAction;
+    lbl23: TLabel;
+    lblNomeCliente: TLabel;
+    zqryQryCaixaprodutoID: TIntegerField;
+    fltfldQryCaixaquantidade: TFloatField;
+    fltfldQryCaixavalorUnitario: TFloatField;
+    fltfldQryCaixatotalProduto: TFloatField;
+    wdstrngfldQryCaixaprodutoNome: TWideStringField;
+    QryCaixafoto: TBlobField;
+    QryUpdate: TZQuery;
+    dsUpdate: TDataSource;
+    procedure tmr1Timer(Sender: TObject);
+    procedure actSairExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGridCaixaCellClick(Column: TColumn);
+    procedure actQuantidadeExecute(Sender: TObject);
+    procedure DBGridCaixaMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint;
+          var Handled: Boolean);
+    procedure edtCodigoBarrasExit(Sender: TObject);
+    procedure actPesquisarExecute(Sender: TObject);
+    procedure actExcluirExecute(Sender: TObject);
+    procedure lbl20Click(Sender: TObject);
+
+  private
+    FNomeCliente: string;
+    FValorTotal: Currency;
+    OriginalQuery: string;
+    function TotalizarProduto(valorUnitario, quantidade: Double): Double;
+    procedure CalcularTotalGeral;
+    procedure AtualizarInformacoesProduto;
+    procedure AtualizarQuantidadeNoBanco(const NovoValor: String);
+    procedure BuscarProduto;
+    procedure ExcluirItem(ProdutoID: Integer);
+
+  public
+    procedure CarregarDadosVenda(NomeCliente: string; ValorTotal: Currency);
+  end;
+
+var
+  frmCaixaPDV: TfrmCaixaPDV;
+
+implementation
+
+uses
+  uDtmVenda, uDTMConexao, uTextBox, uProVenda, cProVenda;
+
+{$R *.dfm}
+
+// Form
+
+procedure TfrmCaixaPDV.FormCreate(Sender: TObject);
+begin
+  OriginalQuery := 'SELECT ' +
+                   '  iv.produtoID, ' +
+                   '  iv.quantidade, ' +
+                   '  iv.valorUnitario, ' +
+                   '  iv.totalProduto, ' +
+                   '  p.nome AS produtoNome, ' +
+                   '  p.foto ' +
+                   'FROM ' +
+                   '  itensVenda iv ' +
+                   'JOIN ' +
+                   '  produtos p ON iv.produtoID = p.produtoID';
+
+  edtCodigoBarras.Text := '';
+  QryCaixa.SQL.Text := OriginalQuery;
+  QryCaixa.Open;
+
+  lbl4.Caption := DateToStr(Date);
+  AtualizarInformacoesProduto;
+  CalcularTotalGeral;
+end;
+
+procedure TfrmCaixaPDV.lbl20Click(Sender: TObject);
+begin
+  // Implementar a lógica para o evento lbl20Click, se necessário
+end;
+
+procedure TfrmCaixaPDV.CarregarDadosVenda(NomeCliente: string; ValorTotal: Currency);
+begin
+  FNomeCliente := NomeCliente;
+  FValorTotal := ValorTotal;
+
+  lblNomeCliente.Caption := FNomeCliente;
+  lblTotal.Caption := FormatFloat('R$ ###,###.00', FValorTotal);
+end;
+
+procedure TfrmCaixaPDV.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  QryCaixa.Close;
+end;
+
+// ATALHOS - ActionList
+
+procedure TfrmCaixaPDV.actExcluirExecute(Sender: TObject);
+begin
+  if not QryCaixa.IsEmpty then
+  begin
+    if MessageDlg('Você realmente deseja excluir o item selecionado?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      ExcluirItem(QryCaixa.FieldByName('produtoID').AsInteger);
+
+      QryCaixa.Close;
+      QryCaixa.Open;
+
+      imgProdutos.Picture := nil;
+    end;
+  end
+  else
+    ShowMessage('Nenhum item selecionado.');
+end;
+
+procedure TfrmCaixaPDV.ExcluirItem(ProdutoID: Integer);
+begin
+  QryUpdate.Close;
+  QryUpdate.SQL.Text := 'DELETE FROM itensVenda WHERE produtoID = :produtoID';
+  QryUpdate.ParamByName('produtoID').AsInteger := ProdutoID;
+  QryUpdate.ExecSQL;
+end;
+
+procedure TfrmCaixaPDV.actPesquisarExecute(Sender: TObject);
+begin
+  edtCodigoBarras.SetFocus;
+end;
+
+procedure TfrmCaixaPDV.actQuantidadeExecute(Sender: TObject);
+var
+  NovoValor: String;
+  RegistroID: Integer;
+begin
+  if not Assigned(frmTextBox) then
+    frmTextBox := TfrmTextBox.Create(Self);
+
+  try
+    NovoValor := lblQuantidade.Caption;
+    RegistroID := QryCaixa.FieldByName('produtoID').AsInteger;
+
+    if frmTextBox.ShowModalValue(NovoValor) then
+    begin
+      lblQuantidade.Caption := frmTextBox.Value;
+      AtualizarQuantidadeNoBanco(frmTextBox.Value);
+
+      QryCaixa.Close;
+      QryCaixa.Open;
+
+      QryCaixa.Locate('produtoID', RegistroID, []);
+
+      AtualizarInformacoesProduto;
+      CalcularTotalGeral;
+    end;
+  finally
+    frmTextBox.Free;
+    frmTextBox := nil;
+  end;
+end;
+
+procedure TfrmCaixaPDV.AtualizarQuantidadeNoBanco(const NovoValor: String);
+var
+  NovoQuantidade: Double;
+  NovoTotalProduto: Double;
+begin
+  NovoQuantidade := StrToFloatDef(NovoValor, 0);
+  NovoTotalProduto := TotalizarProduto(QryCaixa.FieldByName('valorUnitario').AsFloat, NovoQuantidade);
+
+  if not QryCaixa.IsEmpty then
+  begin
+    with QryUpdate do
+    begin
+      Close;
+      SQL.Text := 'UPDATE itensVenda SET quantidade = :NovaQuantidade, totalProduto = :NovoTotalProduto WHERE produtoID = :ProdutoID';
+      ParamByName('NovaQuantidade').AsFloat := NovoQuantidade;
+      ParamByName('NovoTotalProduto').AsFloat := NovoTotalProduto;
+      ParamByName('ProdutoID').AsInteger := QryCaixa.FieldByName('produtoID').AsInteger;
+      ExecSQL;
+    end;
+
+    QryCaixa.Close;
+    QryCaixa.Open;
+    CalcularTotalGeral;
+  end;
+end;
+
+procedure TfrmCaixaPDV.BuscarProduto;
+var
+  CodigoBarras: Integer;
+begin
+  if edtCodigoBarras.Text = '' then
+  begin
+    Exit;
+  end;
+
+  CodigoBarras := StrToIntDef(edtCodigoBarras.Text, -1);
+  if CodigoBarras = -1 then
+  begin
+    ShowMessage('Código de barras inválido.');
+    Exit;
+  end;
+
+  QryCaixa.Close;
+  QryCaixa.SQL.Text := OriginalQuery + ' WHERE iv.produtoID = :ProdutoID';
+  QryCaixa.ParamByName('ProdutoID').AsInteger := CodigoBarras;
+  QryCaixa.Open;
+
+  if not QryCaixa.IsEmpty then
+    AtualizarInformacoesProduto
+  else
+    ShowMessage('Produto não encontrado.');
+end;
+
+procedure TfrmCaixaPDV.AtualizarInformacoesProduto;
+begin
+  if not QryCaixa.IsEmpty then
+  begin
+    lblNome.Caption := QryCaixa.FieldByName('produtoNome').AsString;
+    lblValorUnitario.Caption := FormatFloat('R$ ###,###.00', QryCaixa.FieldByName('valorUnitario').AsFloat);
+    lblQuantidade.Caption := FormatFloat('###0.00', QryCaixa.FieldByName('quantidade').AsFloat);
+    lblSubTotal.Caption := FormatFloat('R$ ###,###.00', QryCaixa.FieldByName('totalProduto').AsFloat);
+
+    if not QryCaixa.FieldByName('foto').IsNull then
+      imgProdutos.Picture.LoadFromStream(QryCaixa.CreateBlobStream(QryCaixa.FieldByName('foto'), bmRead))
+    else
+      imgProdutos.Picture := nil;
+  end;
+end;
+
+procedure TfrmCaixaPDV.CalcularTotalGeral;
+begin
+  FValorTotal := 0;
+  QryCaixa.First;
+  while not QryCaixa.Eof do
+  begin
+    FValorTotal := FValorTotal + QryCaixa.FieldByName('totalProduto').AsFloat;
+    QryCaixa.Next;
+  end;
+
+  lblTotal.Caption := FormatFloat('R$ ###,###.00', FValorTotal);
+end;
+
+procedure TfrmCaixaPDV.tmr1Timer(Sender: TObject);
+begin
+  lbl4.Caption := DateToStr(Date);
+end;
+
+procedure TfrmCaixaPDV.edtCodigoBarrasExit(Sender: TObject);
+begin
+  BuscarProduto;
+end;
+
+procedure TfrmCaixaPDV.DBGridCaixaCellClick(Column: TColumn);
+begin
+  AtualizarInformacoesProduto;
+end;
+
+procedure TfrmCaixaPDV.DBGridCaixaMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+  // Implementar a lógica de rolagem do mouse, se necessário
+end;
+
+procedure TfrmCaixaPDV.actSairExecute(Sender: TObject);
+begin
+  Close;
+end;
+
+end.
+

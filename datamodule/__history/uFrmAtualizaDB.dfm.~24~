@@ -1,0 +1,73 @@
+object frmAtualizaDB: TfrmAtualizaDB
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'frmAtualizaDB'
+  ClientHeight = 100
+  ClientWidth = 634
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  Visible = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnl1: TPanel
+    Left = 0
+    Top = 0
+    Width = 634
+    Height = 100
+    Align = alClient
+    BevelOuter = bvLowered
+    BevelWidth = 3
+    BorderWidth = 6
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clSilver
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    Visible = False
+    object pnl2: TPanel
+      Left = 9
+      Top = 9
+      Width = 616
+      Height = 82
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 1
+      Color = clSilver
+      Enabled = False
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Script'
+      Font.Style = []
+      ParentBackground = False
+      ParentFont = False
+      TabOrder = 0
+      object edt1: TLabel
+        Left = 43
+        Top = 25
+        Width = 535
+        Height = 29
+        Caption = 'Atualizando Banco de Dados... Aguarde!!   '
+        Color = clBlack
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -29
+        Font.Name = 'PMingLiU-ExtB'
+        Font.Style = [fsBold, fsItalic]
+        ParentColor = False
+        ParentFont = False
+      end
+    end
+  end
+end

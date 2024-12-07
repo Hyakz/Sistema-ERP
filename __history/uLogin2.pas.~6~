@@ -1,0 +1,72 @@
+unit uLogin2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TfrmLogin2 = class(TForm)
+    pnlPrincipal: TPanel;
+    pnl1: TPanel;
+    btnFechar: TSpeedButton;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    pnl2: TPanel;
+    lbl3: TLabel;
+    edt1: TEdit;
+    pnl3: TPanel;
+    pnl4: TPanel;
+    lbl4: TLabel;
+    edt2: TEdit;
+    pnl5: TPanel;
+    pnl6: TPanel;
+    btnAcessar: TSpeedButton;
+    procedure btnFecharClick(Sender: TObject);
+    procedure btnAcessarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLogin2: TfrmLogin2;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmLogin2.btnAcessarClick(Sender: TObject);
+var oUsuario:TUsuario;
+begin
+  Try
+    oUsuario:=TUsuario.Create(dtmPrincipal.ConexaoDB);
+    if oUsuario.Logar(edtUsuario.Text,edtSenha.Text) then
+    begin
+       oUsuarioLogado.codigo := oUsuario.codigo;
+       oUsuarioLogado.nome   := oUsuario.nome;
+       oUsuarioLogado.senha  := oUsuario.senha;
+
+       FecharFormulario //Fecha o Formulario do Login
+    end
+
+    else
+    begin
+      MessageDlg('Usuário Inválido',mtInformation,[mbok],0);
+      edtUsuario.SetFocus;
+    end;
+
+  Finally
+    if Assigned(oUsuario) then
+       FreeAndNil(oUsuario);
+  End;
+end;
+
+procedure TfrmLogin2.btnFecharClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+end.

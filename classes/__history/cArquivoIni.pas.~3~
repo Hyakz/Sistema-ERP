@@ -1,0 +1,15 @@
+unit cArquivoIni;
+
+interface
+
+uses System.Classes,
+     Vcl.Controls,
+     Vcl.ExtCtrls,
+     Vcl.Dialogs,
+     ZDataset,
+     System.IniFiles,
+     System.SysUtils;
+
+implementation
+
+end.

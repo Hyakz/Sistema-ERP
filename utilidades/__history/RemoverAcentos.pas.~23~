@@ -1,0 +1,40 @@
+unit RemoverAcentos;
+
+interface
+
+uses System.Classes,
+     Vcl.Controls,
+     Vcl.ExtCtrls,
+     Vcl.Dialogs,
+     ZAbstractConnection,
+     ZConnection,
+     ZAbstractRODataset,
+     ZAbstractDataset,
+     ZDataset,
+     System.SysUtils,
+     Vcl.Forms,
+     Vcl.Buttons;
+
+type
+  TRemoverAcentos = class
+
+  private
+
+  public
+   class procedure RemoverAcentos.Remover(const ATexto: string);
+end;
+
+implementation
+
+class procedure RemoverAcentos.Remover(const ATexto: string);
+const ComAcento = '·‡„‚ÈÍÌÛÙı˙¸Á¡¿√¬… Õ”‘’⁄‹«';
+      SemAcento = 'aaaaeeiooouucAAAAEEIOOOUUC';
+var I: Integer;
+begin
+  Result := ATexto;
+  for I := 1 to Length(ComAcento) do
+    Result := StringReplace(Result, ComAcento[I], SemAcento[I], [rfReplaceAll]);
+end;
+
+end.
+

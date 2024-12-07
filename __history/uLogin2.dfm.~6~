@@ -1,0 +1,140 @@
+object frmLogin2: TfrmLogin2
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  ClientHeight = 381
+  ClientWidth = 691
+  Color = 3355443
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlPrincipal: TPanel
+    Left = 0
+    Top = 0
+    Width = 691
+    Height = 381
+    Align = alClient
+    BevelOuter = bvNone
+    Color = 1644825
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitLeft = 85
+    ExplicitTop = 8
+    ExplicitWidth = 687
+    object lbl1: TLabel
+      Left = 79
+      Top = 28
+      Width = 166
+      Height = 32
+      Caption = 'Fa'#231'a o seu login'
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -24
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object pnl1: TPanel
+      Left = 349
+      Top = 0
+      Width = 342
+      Height = 381
+      Align = alRight
+      Color = clWhite
+      ParentBackground = False
+      TabOrder = 0
+      DesignSize = (
+        342
+        381)
+      object btnFechar: TSpeedButton
+        Left = 305
+        Top = 9
+        Width = 30
+        Height = 30
+        Cursor = crHandPoint
+        Anchors = [akTop, akRight]
+        Caption = 'X'
+        Flat = True
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Segoe UI Light'
+        Font.Style = []
+        ParentFont = False
+        OnClick = btnFecharClick
+        ExplicitLeft = 299
+      end
+      object lbl2: TLabel
+        Left = 89
+        Top = 28
+        Width = 164
+        Height = 32
+        Caption = 'Seja Bem-Vindo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+    object pnl2: TPanel
+      Left = 23
+      Top = 136
+      Width = 292
+      Height = 83
+      BevelOuter = bvNone
+      TabOrder = 1
+      object lbl3: TLabel
+        Left = 0
+        Top = 0
+        Width = 292
+        Height = 27
+        Align = alTop
+        Caption = 'NOME DE USU'#193'RIO'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI Semilight'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object edt1: TEdit
+        Left = 0
+        Top = 27
+        Width = 292
+        Height = 41
+        Align = alTop
+        CharCase = ecUpperCase
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        ExplicitTop = 29
+      end
+      object pnl3: TPanel
+        Left = 0
+        Top = 82
+        Width = 292
+        Height = 1
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clSilver
+        ParentBackground = False
+        TabOrder = 1
+        ExplicitTop = 46
+      end
+    end
+  end
+end
