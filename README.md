@@ -1,4 +1,4 @@
-# Sistema ERP - Projeto Pessoal
+# Sistema ERP
 
 Este repositório contém o código-fonte do **Sistema ERP**, um projeto desenvolvido com o objetivo de gerenciar operações empresariais de maneira eficiente. 
 Este projeto foi minha porta de entrada para o mercado de trabalho, me ajudando a conquistar uma posição como Estagiário de Desenvolvimento na **Domtec Sistemas**.
